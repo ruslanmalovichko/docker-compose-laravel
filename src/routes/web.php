@@ -17,20 +17,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/posts/{post}', function ($post) {
-    // return view('post');
-  // return $post;
-  $posts = [
-    '1' => '11',
-    '2' => '22'
-  ];
+# Route::get('/posts/{post}', function ($post) {
+#     // return view('post');
+#   // return $post;
+#   $posts = [
+#     '1' => '11',
+#     '2' => '22'
+#   ];
+# 
+#   if (! array_key_exists($post, $posts)) {
+#     abort(404, 'Sorry, that post was not found.');
+#   }
+# 
+#   return view('post', [
+#     // 'post' => $posts[$post] ?? 'Nothing here yet.'
+#     'post' => $posts[$post]
+#   ]);
+# });
 
-  if (! array_key_exists($post, $posts)) {
-    abort(404, 'Sorry, that post was not found.');
-  }
+Route::get('/posts/{post}', 'App\Http\Controllers\PostsController@show');
 
-  return view('post', [
-    // 'post' => $posts[$post] ?? 'Nothing here yet.'
-    'post' => $posts[$post]
-  ]);
-});
