@@ -3,23 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostsController extends Controller
 {
-  public function show($post)
+  public function show($slug)
   {
-    $posts = [
-      '1' => '11',
-      '2' => '22'
-    ];
 
-    if (! array_key_exists($post, $posts)) {
-      abort(404, 'Sorry, that post was not found.');
-    }
+    $post = DB::table('posts')->where('slug', $slug)->first();
 
     return view('post', [
-      // 'post' => $posts[$post] ?? 'Nothing here yet.'
-      'post' => $posts[$post]
+      'post' => $post
     ]);
   }
 }
